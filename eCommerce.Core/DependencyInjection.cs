@@ -17,7 +17,7 @@ public static class DependencyInjection
         // Register your core services here
         services.AddTransient<IUsersService, UsersService>();
 
-        //Fluent Validation
+        // Fluent Validation
         services.AddValidatorsFromAssemblyContaining(typeof(LoginRequestValidator));
 
         return services;
