@@ -54,11 +54,11 @@ public class AuthController : ControllerBase
 
         AuthenticationResponse? result = await _usersService.Login(loginRequest);
 
-            if (result == null || result.Success == false)
-            {
-                return Unauthorized(result);
-            }
+        if (result == null || result.Success == false)
+        {
+            return Unauthorized(result);
+        }
 
-            return Ok(result);
+        return Ok(result);
     }
 }
