@@ -48,10 +48,6 @@ app.UseRouting();
 // Add swagger middleware to serve generated Swagger as a JSON endpoint and the Swagger UI
 app.UseSwagger();
 app.UseSwaggerUI();
-//app.UseSwaggerUI(c => {
-//    c.SwaggerEndpoint("/swagger/v1/swagger.json", "eCommerce API V1");
-//    c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
-//});
 
 // Add CORS middleware to allow cross-origin requests from any origin, method, and header
 app.UseCors();
