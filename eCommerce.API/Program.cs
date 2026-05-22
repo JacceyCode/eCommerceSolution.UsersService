@@ -3,12 +3,17 @@ using eCommerce.Core;
 using eCommerce.API.Middlewares;
 using System.Text.Json.Serialization;
 using eCommerce.Core.Mappers;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Infrastructure and Core services to the container.
 builder.Services.AddInfrastructure();
 builder.Services.AddCore();
+
+// Add Service Healthchecks
+builder.Services.AddHealthChecks()
+    .AddCheck("self", () => HealthCheckResult.Healthy("Service is running"), tags: ["live"]);
 
 // Add controllers with JSON options to handle enum serialization as strings
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -58,6 +63,9 @@ app.UseAuthorization();
 
 // Map controllers
 app.MapControllers();
+
+// Map health check endpoint
+app.MapHealthChecks("/health", new() { AllowCachingResponses = false });
 
 app.UseDeveloperExceptionPage();
 app.Run();
